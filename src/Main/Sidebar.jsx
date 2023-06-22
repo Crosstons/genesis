@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Dashboard from '../Main/Dashboard'
-import Minting from '../Main/Minting'
 
 function Sidebar() {
   return (
@@ -11,17 +9,22 @@ function Sidebar() {
       <nav>
         <ul>
           <li>
-            <Link to="/dashboard" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-accent hover:text-background">
-              <Dashboard />
+            <Link to={/dashboard/} className="block py-2.5 px-4 rounded transition duration-200 hover:bg-accent hover:text-background">
+              Dashboard
             </Link>
           </li>
           <li>
-            <Link to="/minting" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-accent hover:text-background">
-              <Minting />
+            <Link to={/minting/} className="block py-2.5 px-4 rounded transition duration-200 hover:bg-accent hover:text-background">
+              Minting
             </Link>
           </li>
         </ul>
       </nav>
+
+      {/* Connect Wallet button */}
+      <button className="bg-accent text-background px-4 py-2 rounded transition duration-200 hover:bg-accentHover">
+        Connect Wallet
+      </button>
     </div>
   );
 }
