@@ -9,12 +9,12 @@ function Sidebar() {
       <nav>
         <ul>
           <li>
-            <Link to={/dashboard/} className="block py-2.5 px-4 rounded transition duration-200 hover:bg-accent hover:text-background">
+            <Link to={'/dashboard'} className="block py-2.5 px-4 rounded transition duration-200 hover:bg-accent hover:text-background">
               Dashboard
             </Link>
           </li>
           <li>
-            <Link to={/minting/} className="block py-2.5 px-4 rounded transition duration-200 hover:bg-accent hover:text-background">
+            <Link to={'/minting'} className="block py-2.5 px-4 rounded transition duration-200 hover:bg-accent hover:text-background">
               Minting
             </Link>
           </li>
