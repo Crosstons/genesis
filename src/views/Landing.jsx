@@ -7,7 +7,6 @@ import FAQSection from '../Landing/FAQSection'
 function Landing() {
   return (
     <div>
-        <Navbar />
         <Hero />
         <Features />
         <FAQSection />

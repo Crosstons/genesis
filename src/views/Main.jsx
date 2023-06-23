@@ -1,10 +1,11 @@
 import React from 'react'
-import Sidebar from '../Main/Sidebar'
+import Sidebar from '../Main/Navbar'
+import Dashboard from '../Main/Dashboard'
 
 function Main() {
   return (
     <div>
-        <Sidebar />
+        <Dashboard />
     </div>
   )
 }
