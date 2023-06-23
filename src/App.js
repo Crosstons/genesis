@@ -5,7 +5,7 @@ import Landing from './views/Landing';
 import Main from './views/Main';
 import Minting from './Main/Minting';
 import Navbar from './Main/Navbar';
-
+import MintingNFT from './Main/MintingNFT';
 function App() {
   return (
     <div className="font-pop">
@@ -15,9 +15,9 @@ function App() {
           <Route path='/' element={<Landing />} />
           <Route path='/main' element={<Main />} />
           <Route path='/minting' element={<Minting />} />
+          <Route path="/mintingnft" element={<MintingNFT />} />
         </Routes>
       </Router>
-      <Minting />
     </div>
   );
 }
