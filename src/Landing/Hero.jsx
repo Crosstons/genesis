@@ -1,5 +1,4 @@
 import React from 'react';
-import img from './img.png';
 
 function Hero() {
   return (
@@ -41,7 +40,7 @@ function Hero() {
           </div>
           <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
             <img
-              src={img}
+              src="https://cdn.discordapp.com/attachments/1063991835871154277/1122203931519504524/8f4cd7ec-3407-495b-9b29-09085b3661e0.jpg"
               alt="Genesis NFT tree mockup"
               className="transition-opacity duration-300 opacity-1 hover:opacity-100"
             />
