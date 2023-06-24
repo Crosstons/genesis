@@ -1,6 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { onConnect } from './Utils';
 
 function MintingNFT() {
+
+  const [connected, setConnected] = useState(false);
+  const [account, setAccount] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      const {res, conn} = await onConnect(connected);
+      setAccount(res);
+      setConnected(conn);
+    })();
+  }, []);
+
   return (
     <section className="text-text bg-background h-screen">
       <div className="container px-5 py-24 mx-auto ">
