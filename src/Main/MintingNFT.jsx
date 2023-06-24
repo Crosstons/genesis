@@ -26,7 +26,7 @@ function MintingNFT() {
               <button className="flex ml-auto text-secondary bg-accent border-0 py-2 px-6 focus:outline-none hover:bg-secondary rounded hover:text-background duration-300">Mint</button>
             </div>
           </div>
-          <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-56 object-cover object-center rounded" src="https://i.seadn.io/gcs/files/415542b9cfaf4f6128e2bb4048592ae3.png?auto=format&dpr=1&w=256" />
+          <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-56 object-cover object-center rounded" src="https://cdn.discordapp.com/attachments/1063991835871154277/1122019549496233984/1e7d6cdd-dee8-48ae-b7f8-3bd478bd6444.jpg" />
         </div>
       </div>
     </section>

@@ -6,7 +6,7 @@ import Minting from '../Main/Minting'
 function Main() {
   return (
     <div>
-
+        <Dashboard />
     </div>
   )
 }
