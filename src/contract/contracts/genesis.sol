@@ -2,13 +2,12 @@
 pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
 import "./TreeCollection.sol";
 
 contract Genesis is ERC20 {
 
     using Counters for Counters.Counter;
-    Counters.Counter  private TreeCollectionCounter;
+    Counters.Counter public TreeCollectionCounter;
     
     uint256 immutable base = 1e24;
     uint256 immutable gne = 1e18;
@@ -37,7 +36,7 @@ contract Genesis is ERC20 {
         mapping(uint256 => TreeDetails) treeDetails; // mapping to store user details with its tokenID
     }
 
-    mapping(uint256 => TreeCollection) treecollections; // to keep record of collection with their IDs
+    mapping(uint256 => TreeCollection) public treecollections; // to keep record of collection with their IDs
     mapping(uint256 => UserTreeMapping) userTree; // mapping of a Tree with its collection
     mapping(uint256 => bool) collectionInitialized; // mapping to assign collectionID with bool
 
@@ -105,5 +104,15 @@ contract Genesis is ERC20 {
         mint(msg.sender, 5 * gne);
 
         return true;
+    }
+
+    function getTreeDetails(uint256 collectionId, uint256 tokenId) public view returns(TreeDetails memory) {
+        return userTree[collectionId].treeDetails[tokenId];
+        //returns details related to a particula NFT(Tree)
+    }
+
+    function returnNFTcount(uint256 collectionID) public view returns(uint256) {
+        return (treecollections[collectionID].tokenIdCounter());
+        //returns NFTs minted in a particular collection
     }
 }
