@@ -8,14 +8,14 @@ import Navbar from './Main/Navbar';
 import MintingNFT from './Main/MintingNFT';
 function App() {
   return (
-    <div className="font-pop">
+    <div className="font-pop bg-background">
       <Router>
         <Navbar />
         <Routes>
           <Route path='/' element={<Landing />} />
           <Route path='/main' element={<Main />} />
           <Route path='/minting' element={<Minting />} />
-          <Route path="/mintingnft" element={<MintingNFT />} />
+          <Route path="/mintingnft/:id" element={<MintingNFT />} />
         </Routes>
       </Router>
     </div>

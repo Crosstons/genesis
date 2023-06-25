@@ -38,16 +38,30 @@ export const onConnect = async (connected) => {
     }
   }
 
-
 export const nfts = [
-    { id: 1, name: 'NFT 1', collection: 'Collection 1', image: 'https://cdn.discordapp.com/attachments/1063991835871154277/1122018737135038544/92e25f4c-e473-4d00-91e9-55eba4711e35.jpg', number: '#1' },
-    { id: 2, name: 'NFT 2', collection: 'Dragon Blood', image: 'https://cdn.discordapp.com/attachments/1063991835871154277/1122022797615562842/1125eb85-59cd-4312-9dc1-069d59165fe4.jpg', number: '#2' },
-    { id: 9, name: 'NFT 2', collection: 'Collection 2', image: 'https://cdn.discordapp.com/attachments/1063991835871154277/1122018729023250442/837c15b3-cec9-4dd0-bab5-75e2b9d781dc.jpg', number: '#9' },
-    { id: 3, name: 'NFT 3', collection: 'Collection 3', image: 'https://cdn.discordapp.com/attachments/1063991835871154277/1122019164945662012/7153e52c-618e-463d-aa96-95bc5021671a.jpg', number: '#3' },
-    { id: 4, name: 'NFT 4', collection: 'Collection 4', image: 'https://cdn.discordapp.com/attachments/1063991835871154277/1122019175074897940/01dfa54c-21d0-4d23-a18b-2acdd438618e.jpg', number: '#4' },
-    { id: 5, name: 'NFT 1', collection: 'Collection 1', image: 'https://cdn.discordapp.com/attachments/1063991835871154277/1122019549496233984/1e7d6cdd-dee8-48ae-b7f8-3bd478bd6444.jpg', number: '#5' },
-    { id: 6, name: 'NFT 2', collection: 'Collection 2', image: 'https://cdn.discordapp.com/attachments/1063991835871154277/1122019992003674202/ae6617f9-d4ba-4b31-9a54-2ce10bb8b504.jpg', number: '#6' },
-    { id: 7, name: 'NFT 3', collection: 'Collection 3', image: 'https://cdn.discordapp.com/attachments/1063991835871154277/1122019999947685960/ed6cf5d1-744e-45d8-bd82-1de701f9b4fe.jpg', number: '#7' },
-    { id: 8, name: 'NFT 1', collection: 'Collection 1', image: 'https://cdn.discordapp.com/attachments/1063991835871154277/1122022213156085840/d87450c1-8ade-4f73-9ece-042fa02717d2.jpg', number: '#8' },
-    { id: 10, name: 'NFT 3', collection: 'Collection 3', image: 'https://cdn.discordapp.com/attachments/1063991835871154277/1122024320202448926/e0ce5f27-c560-4d8f-8608-5fa351c86489.jpg', number: '#10' },
+    { 
+      id: 1, 
+      address: "0x53a0FefE0fD9a411E3Fd99cb6Aa8cD453ab7b654", 
+      name: 'BRW', 
+      collection: 'Brazilian Rosewood', 
+      image: 'https://cdn.discordapp.com/attachments/1063991835871154277/1122018737135038544/92e25f4c-e473-4d00-91e9-55eba4711e35.jpg',
+      description: "Brazilian Rosewood, a prized tree species native to Brazil's Atlantic Forest, is endangered due to overexploitation, illegal logging, and habitat loss. Its dense hardwood and exceptional tonal qualities make it ideal for musical instruments. Efforts to protect and restore its populations are crucial for preserving its cultural and ecological significance, as well as supporting industries reliant on its valuable timber. Conservation measures and awareness are essential for the survival of this iconic species.",
+      location: "Near Reserva Florestal Adolpho Ducke (Brazil)"
+    },
+    { 
+      id: 2, 
+      address: "0xF09c9D9688548C99A6c26221D8BCec24af8c5885", 
+      name: 'DB', 
+      collection: 'Dragon Blood', 
+      image: 'https://cdn.discordapp.com/attachments/1063991835871154277/1122022797615562842/1125eb85-59cd-4312-9dc1-069d59165fe4.jpg',
+      description: "The Dragon Blood tree, native to the Socotra archipelago in Yemen, is facing endangerment due to habitat destruction and overharvesting of its valuable resin. Its unique umbrella-shaped crown and crimson sap, known as \"dragon's blood,\" have made it a subject of fascination and commercial interest. The resin has been used for centuries in traditional medicine, dyes, and varnishes. Conservation efforts are vital to safeguard the Dragon Blood tree and preserve its ecological importance, cultural significance, and potential medicinal uses. By promoting sustainable practices and raising awareness, we can help protect this extraordinary tree and the delicate ecosystem it inhabits."
+    },
+    { 
+      id: 3,
+      address :"0xeF6636f4b4b5Bb1F4fF2D1a47e03e94EE43FF37d",
+      name: 'MP', 
+      collection: 'Monkey Puzzle', 
+      image: 'https://cdn.discordapp.com/attachments/1063991835871154277/1122018729023250442/837c15b3-cec9-4dd0-bab5-75e2b9d781dc.jpg',
+      description: "The Monkey Puzzle tree, native to the Andes Mountains, is a striking and endangered conifer. Its spiky branches and dense foliage make it unique. Deforestation and habitat loss have put it at risk. Conservation efforts aim to protect this species, preserving its beauty and vital role in biodiversity."
+    },
   ];

@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { onConnect } from './Utils';
 import { useNavigate } from "react-router-dom";
 import { nfts } from './Utils';
+import genAbi from '../contract/abi/genesis.json';
+
+const { ethers } = require("ethers");
 
 function Minting() {
   // Replace this with your actual data
 
-  const [connected, setConnected] = useState(false);
-  const [account, setAccount] = useState("");
+  const ethprovider = new ethers.BrowserProvider(window.ethereum);
+  const [signer, setSigner] = useState();
+  const genContract = new ethers.Contract(ethers.getAddress("0x0316BcCd466eF3151Ee803dB66E780e82c8FF0ff"), genAbi.abi, signer);
 
   const navigate = useNavigate();
 
   const handleMintClick = (nftId) => {
-    navigate(`/mintingnft/`);
+    navigate(`/mintingnft/${nftId-1}`);
   };
 
   useEffect(() => {
     (async () => {
-      const {res, conn} = await onConnect(connected);
-      setAccount(res);
-      setConnected(conn);
-      console.log(account);
+      const _signer = await ethprovider.getSigner();
+      setSigner(_signer);
+      for(const i in nfts){
+        console.log(nfts[i].address);
+      }
     })();
   }, []);
 
@@ -37,7 +41,6 @@ function Minting() {
                   <h3 className="text-lg font-bold">{nft.name}</h3>
                   <p className="text-sm text-dark-bg">{nft.collection}</p>
                 </div>
-                <span className="text-lg font-bold text-accent">{nft.number}</span>
               </div>
             </div>
             <button onClick={() => handleMintClick(nft.id)} className="w-full bg-accent text-dark-bg py-2 rounded hover:bg-secondary transition-colors duration-300 hover:text-background">Mint</button>
