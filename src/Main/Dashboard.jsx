@@ -1,7 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from 'react';
+import { onConnect } from './Utils';
 import { Link } from 'react-router-dom';
 
 function Dashboard() {
+
+  const [connected, setConnected] = useState(false);
+  const [account, setAccount] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      const {res, conn} = await onConnect(connected);
+      setAccount(res);
+      setConnected(conn);
+    })();
+  }, []);
+
   const nfts = [
     { id: 1, name: 'NFT 1', collection: 'Collection 1', image: 'https://cdn.discordapp.com/attachments/1063991835871154277/1122018737135038544/92e25f4c-e473-4d00-91e9-55eba4711e35.jpg', number: '#1' },
     { id: 2, name: 'NFT 2', collection: 'Collection 2', image: 'https://cdn.discordapp.com/attachments/1063991835871154277/1122018729023250442/837c15b3-cec9-4dd0-bab5-75e2b9d781dc.jpg', number: '#2' },

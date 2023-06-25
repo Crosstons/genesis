@@ -2,11 +2,11 @@ const provider = window.ethereum;
 
 export const onConnect = async (connected) => {
     const _chainId = await provider.request({ method : "eth_chainId"});
-    if (_chainId.toString() !== "0x4e454153" ){
+    if (_chainId.toString() !== "0x4e454152" ){
       try {
         await provider.request({
           method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x4e454153' }],
+          params: [{ chainId: '0x4e454152' }],
         });
       } catch (switchError) {
         if (switchError.code === 4902) {
@@ -15,9 +15,9 @@ export const onConnect = async (connected) => {
               method: 'wallet_addEthereumChain',
               params: [
                 {
-                  chainId: '0x4e454153',
-                  chainName: 'Aurora Testnet',
-                  rpcUrls: ['https://testnet.aurora.dev'],
+                  chainId: '0x4e454152',
+                  chainName: 'Aurora+',
+                  rpcUrls: ['https://mainnet.aurora.dev/7adW6WK2WNVmpTRkxYncqhffSdD1GaQKjHPLL2y3zAN'],
                 },
               ],
             });
