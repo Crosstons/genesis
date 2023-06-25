@@ -1,28 +1,59 @@
 import React, { useEffect, useState } from 'react';
-import { NFTStorage } from 'nft.storage';
+import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import { nfts } from './Utils';
+import genAbi from '../contract/abi/genesis.json';
+import erc20Abi from '../contract/abi/erc20.json';
+import * as fs from 'fs';
 
 const { ethers } = require("ethers");
 
 function MintingNFT() {
 
   const {id} = useParams();
+  const navigate = useNavigate();
   const ethprovider = new ethers.BrowserProvider(window.ethereum);
   const [signer, setSigner] = useState();
   const [collection, setCollection] = useState(nfts[id]);
+  const [minted, setMinted] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const genContract = new ethers.Contract(ethers.getAddress("0xecA2Aa3C74f8481009851A78B5aC8Af971ddb6dB"), genAbi.abi, signer);
+
+  const getBlob = async (url) => {
+    fetch(url)
+      .then( response => {
+        const data = response.blob()
+        console.log(data)
+        return data
+    })
+  }
 
   const handleMint = async () => {
-    const client = new NFTStorage({ token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDE3MTBiNDk4RTE3ZTU4OTVBMjMyZEUwMGQwMUEzMTZiYzVhYWQxQWUiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY4NzY4NzI4NDI1NSwibmFtZSI6IkdlbmVzaXMifQ.lGue5CF2tk-bHsgbKOr72ifY5vi-r8W4MedyBMxcgCw });
-    const metadata = await client.store({
-
-    });
+    setLoading(true);
+    try{
+    let contract = new ethers.Contract(ethers.getAddress("0x87d5D0d30F52d121788b1000C3F35b4a0688D34C"), erc20Abi.abi, signer);
+    const approv = await contract.approve(ethers.getAddress("0xecA2Aa3C74f8481009851A78B5aC8Af971ddb6dB"), Number("5000000000000"));
+    await approv.wait();
+    const result = await genContract.mintTree(collection.id, // // );
+    console.log(result);
+    alert("Mint Successfull!");
+    setLoading(false);
+    navigate('/minting');
+    } catch (error) {
+      alert("Something went wrong" + error);
+      console.log(error);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     (async () => {
       const _signer = await ethprovider.getSigner();
       setSigner(_signer);
+      const temp = new ethers.Contract(ethers.getAddress("0xecA2Aa3C74f8481009851A78B5aC8Af971ddb6dB"), genAbi.abi, _signer);
+      const count = await temp.returnNFTcount(collection.id);
+      setMinted(Number(count));
     })();
   }, []);
 
@@ -44,11 +75,11 @@ function MintingNFT() {
             </div>
             <div className="flex border-t border-b mb-6 border-secondary py-2">
               <span className="text-dark-bg">Available NFTs</span>
-              <span className="ml-auto text-text">30</span>
+              <span className="ml-auto text-text">{ 30 - minted }</span>
             </div>
             <div className="flex">
               <span className="title-font font-medium text-2xl text-text">5 stNEAR</span>
-              <button className="flex ml-auto text-secondary bg-accent border-0 py-2 px-6 focus:outline-none hover:bg-secondary rounded hover:text-background duration-300">Mint</button>
+              <button onClick={handleMint} className="flex ml-auto text-secondary bg-accent border-0 py-2 px-6 focus:outline-none hover:bg-secondary rounded hover:text-background duration-300">{ loading ? "Loading..." : "Mint" }</button>
             </div>
           </div>
           <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-56 object-cover object-center rounded" src="https://cdn.discordapp.com/attachments/1063991835871154277/1122019549496233984/1e7d6cdd-dee8-48ae-b7f8-3bd478bd6444.jpg" />

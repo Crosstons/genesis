@@ -8,12 +8,9 @@ contract Genesis is ERC20 {
 
     using Counters for Counters.Counter;
     Counters.Counter public TreeCollectionCounter;
-    
-    uint256 immutable base = 1e24;
-    uint256 immutable gne = 1e18;
-    ERC20 immutable STNEAR;
 
-    address private admin;
+    ERC20 immutable STNEAR;
+    address immutable admin;
 
     constructor(address _token) ERC20("Genesis", "GNE"){
         admin = msg.sender;
@@ -29,7 +26,6 @@ contract Genesis is ERC20 {
         uint256 lastClaimed;
         uint256 wateredTimes;
         uint256 tokensYielded;
-        bool isInitialized;
     }
 
     struct UserTreeMapping {
@@ -37,42 +33,37 @@ contract Genesis is ERC20 {
     }
 
     mapping(uint256 => TreeCollection) public treecollections; // to keep record of collection with their IDs
+    mapping(TreeCollection => uint256) public CollectionToID; // to get contract instance using their IDs
     mapping(uint256 => UserTreeMapping) userTree; // mapping of a Tree with its collection
-    mapping(uint256 => bool) collectionInitialized; // mapping to assign collectionID with bool
 
-    function mintNewTreeCollection() public {
+    function mintNewTreeCollection(string memory name, string memory symbol) public {
+
         require(msg.sender == admin, "Nope!");
 
         TreeCollectionCounter.increment();
         uint256 collectionID = TreeCollectionCounter.current();
-        TreeCollection newCollection = new TreeCollection();
+        TreeCollection newCollection = new TreeCollection(name, symbol);
         treecollections[collectionID] = newCollection;
-        collectionInitialized[collectionID] = true;
+        CollectionToID[newCollection] = collectionID;
     }
 
     function mintTree(uint256 collectionID, string memory _uri) public {
 
-        require(collectionInitialized[collectionID] == true, "Collection is not yet minted!");
-
-        require(STNEAR.transferFrom(msg.sender, address(this), 5 * base), "STNEAR: transferFrom failed"); 
+        require(STNEAR.transferFrom(msg.sender, address(this), 5 * 10 ** 24), "STNEAR: transferFrom failed"); 
 
         TreeCollection treecollection = TreeCollection(treecollections[collectionID]);
         treecollection.safeMint(msg.sender, _uri); 
         uint256 tokenID = treecollection.tokenIdCounter();
-        userTree[collectionID].treeDetails[tokenID] = TreeDetails(0, 0, 0, 0, true);
+        userTree[collectionID].treeDetails[tokenID] = TreeDetails(0, 0, 0, 0);
     }
 
     function water(uint256 _collectionID, uint256 _tokenID) public returns(bool) {
-
-        require(collectionInitialized[_collectionID] == true, "Collection is not yet minted!");
-
-        require(userTree[_collectionID].treeDetails[_tokenID].isInitialized, "Tree does not exist");
 
         TreeCollection treecollection = TreeCollection(treecollections[_collectionID]);
 
         require(treecollection.ownerOf(_tokenID) == msg.sender, "You are not the owner");
 
-        require(STNEAR.transferFrom(msg.sender, address(this), 1 * base), "STNEAR: transferFrom failed"); 
+        require(STNEAR.transferFrom(msg.sender, address(this), 1 * 10 ** 24), "STNEAR: transferFrom failed"); 
 
         userTree[_collectionID].treeDetails[_tokenID].lastWatered = block.timestamp;
         userTree[_collectionID].treeDetails[_tokenID].wateredTimes += 1;
@@ -82,26 +73,16 @@ contract Genesis is ERC20 {
 
     function claim(uint256 _collectionID, uint256 _tokenID) public returns(bool) {
 
-        require(collectionInitialized[_collectionID] == true, "Collection is not yet minted");
-
-        require(userTree[_collectionID].treeDetails[_tokenID].isInitialized, "Tree does not exist");
-
         TreeCollection treecollection = TreeCollection(treecollections[_collectionID]);
 
         require(treecollection.ownerOf(_tokenID) == msg.sender, "You are not the owner");
 
-        require(
-            block.timestamp - userTree[_collectionID].treeDetails[_tokenID].lastWatered <= 43200, 
-            "Water First"
-        );
-        require(
-            block.timestamp - userTree[_collectionID].treeDetails[_tokenID].lastClaimed > 86400,
-            "Can't Claim"
-        );
+        require(block.timestamp - userTree[_collectionID].treeDetails[_tokenID].lastWatered <= 43200, "Water First");
+        require(block.timestamp - userTree[_collectionID].treeDetails[_tokenID].lastClaimed > 86400, "Can't Claim");
 
         userTree[_collectionID].treeDetails[_tokenID].lastClaimed = block.timestamp;
         userTree[_collectionID].treeDetails[_tokenID].tokensYielded += 5;
-        mint(msg.sender, 5 * gne);
+        mint(msg.sender, 5 * 10 ** 18);
 
         return true;
     }
@@ -114,5 +95,10 @@ contract Genesis is ERC20 {
     function returnNFTcount(uint256 collectionID) public view returns(uint256) {
         return (treecollections[collectionID].tokenIdCounter());
         //returns NFTs minted in a particular collection
+    }
+
+    function getCollectionID(TreeCollection collection) public view returns (uint256) {
+        return CollectionToID[collection];
+        // to get particular collection ID using its instance
     }
 }

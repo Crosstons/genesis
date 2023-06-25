@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract TreeCollection is ERC721, ERC721URIStorage{
 
-    address parent;
+    address immutable parent;
 
     modifier onlyGenesis {
         require(msg.sender == parent, "You do not have access!");
@@ -16,7 +16,7 @@ contract TreeCollection is ERC721, ERC721URIStorage{
     using Counters for Counters.Counter;
     Counters.Counter public tokenIdCounter;
 
-    constructor() ERC721("Genesis", "GNE") {
+    constructor(string memory name, string memory symbol) ERC721(name, symbol) {
         parent = msg.sender;
     }
 
