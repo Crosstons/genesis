@@ -2,59 +2,22 @@
 pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-
-contract Tree is ERC721, ERC721URIStorage, ERC721Burnable{
-
-    address public parent;
-
-    modifier onlyGenesis {
-        require(msg.sender == parent, "You do not have access!");
-        _;
-    }
-
-    using Counters for Counters.Counter;
-    Counters.Counter public _tokenIdCounter;
-
-    constructor() ERC721("Genesis", "GNE") {
-        parent = msg.sender;
-    }
-
-    function safeMint(address to, string memory uri) public onlyGenesis {
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
-        _setTokenURI(tokenId, uri);
-    }
-
-    function burn(uint256 tokenID) public override onlyGenesis {
-        super._burn(tokenID);
-    }
-
-    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
-        super._burn(tokenId);
-    }
-    function tokenURI(uint256 tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
-        return super.tokenURI(tokenId);
-    }
-
-    function supportsInterface(bytes4 interfaceId)public view override(ERC721, ERC721URIStorage) returns (bool) {
-        return super.supportsInterface(interfaceId);
-    }
-}
+import "./TreeCollection.sol";
 
 contract Genesis is ERC20 {
 
-    Tree public tree;
+    using Counters for Counters.Counter;
+    Counters.Counter  private TreeCollectionCounter;
+    
     uint256 immutable base = 1e24;
-
+    uint256 immutable gne = 1e18;
     ERC20 immutable STNEAR;
 
+    address private admin;
+
     constructor(address _token) ERC20("Genesis", "GNE"){
-        tree = new Tree();
+        admin = msg.sender;
         STNEAR = ERC20(_token);
     }
 
@@ -70,44 +33,76 @@ contract Genesis is ERC20 {
         bool isInitialized;
     }
 
-    mapping(uint256 => TreeDetails) public userstree;
+    struct UserTreeMapping {
+        mapping(uint256 => TreeDetails) treeDetails; // mapping to store user details with its tokenID
+    }
 
-    function mintTree(string memory _uri) public {
+    mapping(uint256 => TreeCollection) treecollections; // to keep record of collection with their IDs
+    mapping(uint256 => UserTreeMapping) userTree; // mapping of a Tree with its collection
+    mapping(uint256 => bool) collectionInitialized; // mapping to assign collectionID with bool
+
+    function mintNewTreeCollection() public {
+        require(msg.sender == admin, "Nope!");
+
+        TreeCollectionCounter.increment();
+        uint256 collectionID = TreeCollectionCounter.current();
+        TreeCollection newCollection = new TreeCollection();
+        treecollections[collectionID] = newCollection;
+        collectionInitialized[collectionID] = true;
+    }
+
+    function mintTree(uint256 collectionID, string memory _uri) public {
+
+        require(collectionInitialized[collectionID] == true, "Collection is not yet minted!");
 
         require(STNEAR.transferFrom(msg.sender, address(this), 5 * base), "STNEAR: transferFrom failed"); 
 
-        tree.safeMint(msg.sender, _uri);
-        uint256 tokenID = tree._tokenIdCounter() - 1;
-        userstree[tokenID] = TreeDetails(0, 0, 0, 0, true);
+        TreeCollection treecollection = TreeCollection(treecollections[collectionID]);
+        treecollection.safeMint(msg.sender, _uri); 
+        uint256 tokenID = treecollection.tokenIdCounter();
+        userTree[collectionID].treeDetails[tokenID] = TreeDetails(0, 0, 0, 0, true);
     }
 
-    function water(uint256 tokenID) public returns(bool) {
+    function water(uint256 _collectionID, uint256 _tokenID) public returns(bool) {
 
-        require(userstree[tokenID].isInitialized, "Tree not initialized. Mint a tree first.");
-        require(tree.ownerOf(tokenID) == msg.sender, "You are not the owner!");
+        require(collectionInitialized[_collectionID] == true, "Collection is not yet minted!");
+
+        require(userTree[_collectionID].treeDetails[_tokenID].isInitialized, "Tree does not exist");
+
+        TreeCollection treecollection = TreeCollection(treecollections[_collectionID]);
+
+        require(treecollection.ownerOf(_tokenID) == msg.sender, "You are not the owner");
 
         require(STNEAR.transferFrom(msg.sender, address(this), 1 * base), "STNEAR: transferFrom failed"); 
-        
-        userstree[tokenID].lastWatered = block.timestamp;
-        userstree[tokenID].wateredTimes += 1;
+
+        userTree[_collectionID].treeDetails[_tokenID].lastWatered = block.timestamp;
+        userTree[_collectionID].treeDetails[_tokenID].wateredTimes += 1;
 
         return true;
     }
 
-    function claim(uint256 tokenID) public returns(bool) {
-        require(userstree[tokenID].isInitialized, "Tree not initialized. Mint a tree first.");
-        require(tree.ownerOf(tokenID) == msg.sender, "You are not the owner!");
+    function claim(uint256 _collectionID, uint256 _tokenID) public returns(bool) {
+
+        require(collectionInitialized[_collectionID] == true, "Collection is not yet minted");
+
+        require(userTree[_collectionID].treeDetails[_tokenID].isInitialized, "Tree does not exist");
+
+        TreeCollection treecollection = TreeCollection(treecollections[_collectionID]);
+
+        require(treecollection.ownerOf(_tokenID) == msg.sender, "You are not the owner");
+
         require(
-            block.timestamp - userstree[tokenID].lastWatered <= 43200, 
-            "Looks like some of us are trying to revolutionize agriculture by claiming rewards without watering their plants!"
+            block.timestamp - userTree[_collectionID].treeDetails[_tokenID].lastWatered <= 43200, 
+            "Water First"
         );
         require(
-            block.timestamp - userstree[tokenID].lastClaimed > 86400,
-            "You are not eligible to claim"
+            block.timestamp - userTree[_collectionID].treeDetails[_tokenID].lastClaimed > 86400,
+            "Can't Claim"
         );
-        userstree[tokenID].lastClaimed = block.timestamp;
-        userstree[tokenID].tokensYielded += 5;
-        mint(msg.sender, 5 * 10 ** 18);
+
+        userTree[_collectionID].treeDetails[_tokenID].lastClaimed = block.timestamp;
+        userTree[_collectionID].treeDetails[_tokenID].tokensYielded += 5;
+        mint(msg.sender, 5 * gne);
 
         return true;
     }
