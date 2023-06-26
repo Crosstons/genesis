@@ -29,7 +29,7 @@ function Minting() {
   }, []);
 
   return (
-    <div className="p-4 bg-background text-text font-pop ">
+    <div className="p-4 bg-background text-text font-pop h-screen">
       <h2 className="text-2xl font-bold mb-4">Available Collections</h2>
       <div className="grid grid-cols-5 gap-12">
         {nfts.map(nft => (
