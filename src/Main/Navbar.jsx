@@ -18,7 +18,7 @@ function Navbar() {
   return (
     <div className="w-full bg-background text-primary sticky top-0 z-50">
       <div className="flex items-center justify-between px-6 py-4">
-        <h1 className="text-2xl font-semibold">Genesis NFTs</h1>
+        <Link to={'/'} className="text-2xl font-semibold">Genesis NFTs</Link>
 
         <nav className="space-x-4">
           <Link to="/main" className="py-2 px-4 rounded transition duration-200 hover:bg-accent hover:text-background">

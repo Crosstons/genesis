@@ -1,4 +1,12 @@
 const provider = window.ethereum;
+const { ethers } = require("ethers");
+
+export const getTimeStamp = async () => {
+  const _provider = new ethers.JsonRpcProvider("https://mainnet.aurora.dev/7adW6WK2WNVmpTRkxYncqhffSdD1GaQKjHPLL2y3zAN");
+  let b_number = await _provider.getBlockNumber();
+  let b_lock = await _provider.getBlock(b_number);
+  return b_lock.timestamp;
+}
 
 export const onConnect = async (connected) => {
     const _chainId = await provider.request({ method : "eth_chainId"});

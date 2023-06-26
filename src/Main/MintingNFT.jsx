@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import { nfts } from './Utils';
 import genAbi from '../contract/abi/genesis.json';
 import erc20Abi from '../contract/abi/erc20.json';
-import * as fs from 'fs';
 
 const { ethers } = require("ethers");
 
@@ -32,9 +31,9 @@ function MintingNFT() {
   const handleMint = async () => {
     setLoading(true);
     try{
-  //  let contract = new ethers.Contract(ethers.getAddress("0x87d5D0d30F52d121788b1000C3F35b4a0688D34C"), erc20Abi.abi, signer);
-  //  const approv = await contract.approve(ethers.getAddress("0xecA2Aa3C74f8481009851A78B5aC8Af971ddb6dB"), Number("5000000000000"));
-  //  await approv.wait();
+    let contract = new ethers.Contract(ethers.getAddress("0x87d5D0d30F52d121788b1000C3F35b4a0688D34C"), erc20Abi.abi, signer);
+    const approv = await contract.approve(ethers.getAddress("0xecA2Aa3C74f8481009851A78B5aC8Af971ddb6dB"), Number("5000000000000"));
+    await approv.wait();
     const result = await genContract.mintTree(collection.id, collection.metadata);
     await result.wait();
     console.log(result);
@@ -83,7 +82,7 @@ function MintingNFT() {
               <button onClick={handleMint} className="flex ml-auto text-secondary bg-accent border-0 py-2 px-6 focus:outline-none hover:bg-secondary rounded hover:text-background duration-300">{ loading ? "Loading..." : "Mint" }</button>
             </div>
           </div>
-          <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-56 object-cover object-center rounded" src="https://cdn.discordapp.com/attachments/1063991835871154277/1122019549496233984/1e7d6cdd-dee8-48ae-b7f8-3bd478bd6444.jpg" />
+          <img alt="tree" className="lg:w-1/2 w-full lg:h-auto h-56 object-cover object-center rounded" src={collection.image} />
         </div>
       </div>
     </section>
