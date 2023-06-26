@@ -26,7 +26,7 @@ function Dashboard() {
     console.log(timestamp);
     for(const i in nfts) {
       let contract = new ethers.Contract(ethers.getAddress(nfts[i].address), treeAbi.abi, signer);
-      const bal = await contract.balanceOf(account.res);
+      const bal = await genContract.returnNFTcount(Number(i) + 1);
       console.log(bal);
       for (var j = 1; j <= bal; j++) {
         console.log(Number(i + 1), j);
