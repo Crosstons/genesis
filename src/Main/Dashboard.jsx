@@ -159,13 +159,14 @@ fill="#3a5a40" stroke="#a3b18a">
 
     <p className="text-secondary text-xl">{displayedNFT.yield}</p>
 </div>
+<button onClick={handleClaim} className="flex ml-auto text-secondary bg-accent border-0 py-2 px-6 focus:outline-none hover:bg-secondary rounded hover:text-background duration-300">{ loading ? "Loading..." : "Claim" }</button>
 </div>
 
           </>
         )}
         <div className="relative pt-1">
           <div className="overflow-hidden h-3 mb-4 text-xs flex rounded bg-dark-bg">
-            <div style={{ width: `${hydration}%`, background: `linear-gradient(90deg, #10b981 ${hydration}%, #a1a1a1 0%)` }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center transition-width duration-500 ease-in-out"></div>
+            <div style={{ width: `${hydration}%`, background: `linear-gradient(90deg, #10b981 ${hydration}%, #10b981 0%)` }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center transition-width duration-500 ease-in-out"></div>
           </div>
         </div>
         <button onClick={handleWater} className="w-full bg-dark-bg text-background py-2 rounded hover:bg-secondary transition-colors duration-300">{ loading ? "Loading.." : "Hydrate" }</button>
