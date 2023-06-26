@@ -32,10 +32,11 @@ function MintingNFT() {
   const handleMint = async () => {
     setLoading(true);
     try{
-    let contract = new ethers.Contract(ethers.getAddress("0x87d5D0d30F52d121788b1000C3F35b4a0688D34C"), erc20Abi.abi, signer);
-    const approv = await contract.approve(ethers.getAddress("0xecA2Aa3C74f8481009851A78B5aC8Af971ddb6dB"), Number("5000000000000"));
-    await approv.wait();
-    const result = await genContract.mintTree(collection.id, // // );
+  //  let contract = new ethers.Contract(ethers.getAddress("0x87d5D0d30F52d121788b1000C3F35b4a0688D34C"), erc20Abi.abi, signer);
+  //  const approv = await contract.approve(ethers.getAddress("0xecA2Aa3C74f8481009851A78B5aC8Af971ddb6dB"), Number("5000000000000"));
+  //  await approv.wait();
+    const result = await genContract.mintTree(collection.id, collection.metadata);
+    await result.wait();
     console.log(result);
     alert("Mint Successfull!");
     setLoading(false);
