@@ -19,11 +19,6 @@ function Features() {
             <div className="flex-grow transition-all duration-500 ease-in-out">
               <h2 className="text-primary text-xl title-font font-medium mb-3 font-pop">Restore Ecosystems</h2>
               <p className="leading-relaxed text-base font-pop">Every Genesis NFT represents a tree planted in a global reforestation project, actively restoring natural ecosystems.</p>
-              <a className="mt-3 text-secondary inline-flex items-center transition-all duration-500 ease-in-out">Learn More
-                <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-              </a>
             </div>
           </div>
           <div className="p-4 md:w-1/3 flex flex-col text-center items-center transition-all duration-500 ease-in-out">
@@ -33,11 +28,6 @@ function Features() {
             <div className="flex-grow transition-all duration-500 ease-in-out">
               <h2 className="text-primary text-xl title-font font-medium mb-3 font-pop">Sustainable Investment</h2>
               <p className="leading-relaxed text-base font-pop">Genesis NFTs offer an opportunity to make a sustainable investment, supporting environmental projects while owning a unique digital asset.</p>
-              <a className="mt-3 text-secondary inline-flex items-center transition-all duration-500 ease-in-out">Learn More
-                <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-              </a>
             </div>
           </div>
           <div className="p-4 md:w-1/3 flex flex-col text-center items-center transition-all duration-500 ease-in-out">
@@ -47,11 +37,6 @@ function Features() {
             <div className="flex-grow transition-all duration-500 ease-in-out">
               <h2 className="text-primary text-xl title-font font-medium mb-3 font-pop">Unique Digital Asset</h2>
               <p className="leading-relaxed text-base font-pop">Each Genesis NFT is unique, linked to a specific tree in a specific location. Own a piece of the growing digital world while supporting the real one.</p>
-              <a className="mt-3 text-secondary inline-flex items-center transition-all duration-500 ease-in-out">Learn More
-                <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-              </a>
             </div>
           </div>
         </div>

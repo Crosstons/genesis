@@ -29,7 +29,7 @@ function Dashboard() {
       const bal = await genContract.returnNFTcount(Number(i) + 1);
       console.log(bal);
       for (var j = 1; j <= bal; j++) {
-        console.log(Number(i + 1), j);
+        console.log(Number(i) + 1, j);
         let temp = await contract.ownerOf(j);
         if(String(temp).toLowerCase() == account.res.toLowerCase()) {
           const res = await genContract.getTreeDetails(Number(i) + 1, j);
@@ -53,6 +53,7 @@ function Dashboard() {
     setDisplayedNFT(temp_list[0]);
     setLoaded(true);
     setLoading(false);
+    handleRowClick(temp_list[0]);
   }
 
   useEffect(() => {
@@ -70,24 +71,31 @@ function Dashboard() {
 
   const handleWater =  async () => {
     setLoading(true);
+    let temp = displayedNFT.id;
     console.log(displayedNFT.collection_id, displayedNFT.number);
     try{
     const res = await genContract.water(displayedNFT.collection_id, displayedNFT.number);
     await res.wait();
+    await handleFetch();
+    setDisplayedNFT(nftList[temp - 1]);
     alert("Watered Successfully!!"); 
     } catch (error) {
       alert("Something went wrong - " + error);
     }
     setLoading(false);
+    handleRowClick(nftList[temp - 1]);
   }
 
   const handleClaim =  async () => {
     setLoading(true);
+    let temp = displayedNFT.id;
     if(displayedNFT.claimable) {
     console.log(displayedNFT.collection_id, displayedNFT.number);
     try{
     const res = await genContract.claim(displayedNFT.collection_id, displayedNFT.number);
     await res.wait();
+    await handleFetch();
+    setDisplayedNFT(nftList[temp - 1]);
     alert("Claimed Successfully!!"); 
     } catch (error) {
       alert("Something went wrong - " + error);
@@ -157,9 +165,9 @@ fill="#3a5a40" stroke="#a3b18a">
 </g>
 </svg>
 
-    <p className="text-secondary text-xl">{displayedNFT.yield}</p>
-</div>
-<button onClick={handleClaim} className="flex ml-auto text-secondary bg-accent border-0 py-2 px-6 focus:outline-none hover:bg-secondary rounded hover:text-background duration-300">{ loading ? "Loading..." : "Claim" }</button>
+    <p className="text-secondary text-xl">5</p>
+</div> <span>-</span>
+<button onClick={handleClaim} className="flex ml-auto mr-auto text-secondary bg-accent border-0 py-2 px-6 focus:outline-none hover:bg-secondary rounded hover:text-background duration-300">{ loading ? "Loading..." : "Claim" }</button>
 </div>
 
           </>
@@ -169,7 +177,7 @@ fill="#3a5a40" stroke="#a3b18a">
             <div style={{ width: `${hydration}%`, background: `linear-gradient(90deg, #10b981 ${hydration}%, #10b981 0%)` }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center transition-width duration-500 ease-in-out"></div>
           </div>
         </div>
-        <button onClick={handleWater} className="w-full bg-dark-bg text-background py-2 rounded hover:bg-secondary transition-colors duration-300">{ loading ? "Loading.." : "Hydrate" }</button>
+        <button onClick={handleWater} className="w-full bg-dark-bg text-background py-2 rounded hover:bg-secondary transition-colors duration-300">{ loading ? "Loading.." : "Hydrate - 1 stNEAR" }</button>
       </div>
 
       <div className="w-2/3 bg-background p-4">

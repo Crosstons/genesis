@@ -99,8 +99,7 @@ export const nfts = [
     },
     { 
       id: 6,
-      // update address
-      address :"0xE705E8c366144b2689c37B523b5cA0aBaf95Efaf",
+      address :"0xFBDD011B2D9862ab6c7E802Cf703aD78C4364346",
       name: 'BFF',
       collection: 'Brodiaea filifolia', 
       image: 'https://cdn.discordapp.com/attachments/1063991835871154277/1122019549496233984/1e7d6cdd-dee8-48ae-b7f8-3bd478bd6444.jpg',
