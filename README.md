@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# Genesis Project 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
+Genesis is a pioneering initiative that seamlessly blends non-fungible tokens (NFTs) with real-world environmental action. Each Genesis NFT represents a tree that is planted in a global reforestation project, contributing to the restoration of natural ecosystems. By purchasing a Genesis NFT, you're making a sustainable investment, backing critical environmental projects, and becoming the owner of a unique digital asset. In essence, each Genesis NFT is unique, tethered to a specific tree in a particular location. 
 
-## Available Scripts
+## Genesis NFTs
+Genesis NFTs are unique digital assets that represent real-world trees. Each NFT is associated with a specific tree planted in a global reforestation project. By purchasing and owning a Genesis NFT, you contribute to reforestation efforts, and in return, you own a unique digital asset that grows over time.
 
-In the project directory, you can run:
+## Key Functionalities 
 
-### `npm start`
+### Minting
+To mint a Genesis NFT, you will need to use your STNEAR tokens. Each minted NFT represents a tree that will be planted in the real world. The minting process creates a unique, digital representation of your contribution to global reforestation efforts.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Hydrating 
+To ensure your NFT (tree) thrives, you need to hydrate it regularly. Hydrating your NFT requires STNEAR tokens. Regular hydration will ensure your NFT grows, representing your ongoing contribution to the nurturing of a real-world tree.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Claiming
+After hydrating your NFT, you can claim GNE tokens as rewards. The more you hydrate, the more you can claim. Remember, you can claim your GNE tokens only once every 24 hours, and only if your tree has been watered within the last 12 hours.
 
-### `npm test`
+## GNE Tokens
+The GNE tokens serve as a reward for your active participation in hydrating (nurturing) your NFT. You can claim these tokens based on how well and how often you have hydrated your NFT. The use of these tokens will be determined as the project grows, offering potential for exciting future utilities.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Roadmap 
+Genesis has a multi-stage roadmap that aims to increase the project's impact and usability.
 
-### `npm run build`
+1. Q4 2023: Introduce additional features to improve user experience and engagement.
+2. Q1 2024: Enable the use of GNE tokens for in-app purchases and exclusive benefits.
+3. Q2 2024: Partnership with environmental organizations for direct on-ground impact.
+4. Q3 2024: Extend the Genesis ecosystem to support more environmental causes.
+5. Q4 2024: Integrate with other platforms and ecosystems for broader reach.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Conclusion
+Genesis presents an innovative way to make a difference in our world by blending digital assets with real-world environmental action. By participating, you are contributing to global reforestation projects while owning and growing a unique digital asset. Join us in making a difference one Genesis NFT at a time.
